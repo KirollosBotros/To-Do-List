@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 
-export class AddTodo extends Component {
+interface PropsType {
+    addTodo: (title: string) => void;
+    clearList: () => void;
+}
+
+export class AddTodo extends React.Component<PropsType> {
     state = {
         title: ''
     }
     
-    onChange = (e) => this.setState({title: e.target.value});
+    onChange = (e: any) => this.setState({title: e.target.value});
     
-    onSubmit = (e) => {
+    onSubmit = (e: any) => {
         e.preventDefault();
         this.props.addTodo(this.state.title);
         this.setState({title: ''});
-        document.getElementById("inputField").reset();
+        //document.getElementById("inputField")!.reset();
     }
 
     render() {
@@ -28,7 +33,7 @@ export class AddTodo extends Component {
             marginRight: '12px',
             paddingRight: '28px',
             paddingLeft: '28px',
-        }
+        } as React.CSSProperties;
 
         const clearBtnStyle = {
             paddingLeft: '20px',
@@ -38,7 +43,7 @@ export class AddTodo extends Component {
             marginRight: '12px',
             whiteSpace: 'nowrap',
             textAlign: 'center'
-        }
+        } as React.CSSProperties;
 
         return (
             <form id="inputField" onSubmit={this.onSubmit}>
